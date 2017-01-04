@@ -1,4 +1,3 @@
-
 from PIL import Image
 print("Введите путь к картинке, к которой вы хотите применить фильтр.")
 im = Image.open(input())
@@ -7,6 +6,7 @@ snow = Image.open('snow.png')
 hat = Image.open('hat.png')
 rides = Image.open('santarides.png')
 salut = Image.open('salut.png')
+ramka = Image.open('ramkasneg.png')
 pixels = im.load()
 imWidth = im.width
 imHeight = im.height
@@ -15,6 +15,7 @@ snow = snow.resize((imWidth, imHeight))
 hat = hat.resize((int(imWidth * 0.1), int(imHeight * 0.1)))
 rides = rides.resize((int(imWidth * 0.3), int(imHeight * 0.3)))
 salut = salut.resize((int(imWidth * 0.3), int(imHeight * 0.3)))
+ramka = ramka.resize((imWidth, imHeight))
 
 
 im.paste(snow, (0,0), snow)
@@ -40,5 +41,7 @@ im.paste(hat, (im.width - hat.width, 0), hat)
 im.paste(hat, (im.width // 2 - hat.width // 2, 0), hat)
 im.paste(rides, (0, im.height - rides.height), rides)
 im.paste(salut, (0, 0), salut)
+im.paste(ramka, (0, 0), ramka)
 print("Фильтр применен! Введите место сохранения картинки.")
 im.save(input())
+print("Сохранено.")
