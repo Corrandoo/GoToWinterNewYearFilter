@@ -3,6 +3,8 @@ import tornado.web
 import os
 import uuid
 
+from filter import process
+
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('upload.html')
@@ -14,8 +16,8 @@ class MainHandler(tornado.web.RequestHandler):
         fh = open('images/' + cname, 'wb')
         fh.write(fileinfo['body'])
         #обработка
-        fh = open('results/' + cname, 'wb')
-        fh.write(fileinfo['body'])
+        process('images/'+cname, 'results/' + cname)
+
         self.render('result.html', name=cname)
 
 
