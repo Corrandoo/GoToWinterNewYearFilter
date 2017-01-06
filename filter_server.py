@@ -4,7 +4,7 @@ import os
 import uuid
 from os import listdir
 
-from filter import process
+from filter import processik
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -29,7 +29,7 @@ class MainHandler(tornado.web.RequestHandler):
         fh = open('images/' + cname, 'wb')
         fh.write(fileinfo['body'])
         #обработка
-        process('images/'+cname, 'results/' + cname)
+        processik('images/'+cname, 'results/' + cname)
         self.render('result.html', name=cname)
 
 

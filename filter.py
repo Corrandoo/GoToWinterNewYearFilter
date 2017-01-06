@@ -49,7 +49,7 @@ def processik(filename, savename):
 
 def processdb(filename, savename):
     im = Image.open(filename).convert("RGB")
-    sn = Image.open("snowdb.png").convert("RGBA")  # снег
+    sn = Image.open("resources/snowdb.png").convert("RGBA")  # снег
     sn = sn.resize((im.width, im.height))  # снег
     px = im.load()
     pix = sn.load()  # снег
@@ -93,4 +93,34 @@ def processdb(filename, savename):
 
     sn = sn.filter(ImageFilter.GaussianBlur(radius=0.8))  # размытие
     im.paste(sn, (0, 0), sn)  # снег
+    im.save(savename)
+
+
+def processym(filename, savename):
+    im = Image.open(filename)
+    pixels = im.load()
+    snow = Image.open('resources/snowym.png')  # СНЕГ
+    snow = snow.resize((im.width, im.height))
+    # oleni = Image.open('oleni.png') #ОЛЕНИ
+    # oleni = oleni.resize((im.width//2, oleni.height//2))
+    sani = Image.open('resources/saniym.png')  # САНИ ДЕДА
+    sani = sani.resize((im.width // 5, im.height // 5))
+    # sn = Image.open('snez.png') # СНЕЖИНКИ
+    # sn = sn.resize((im.width//2, sn.height))
+    ded = Image.open('resources/santaym.png')  # САНТА
+    ded = ded.resize((im.width // 4, im.height // 3))
+    for i in range(im.width):
+        for j in range(im.height):
+            r, g, b = pixels[i, j]
+            pixels[i, j] = (r, min(255, g + 10), min(255, b + 70))
+    snow = snow.filter(ImageFilter.GaussianBlur(radius=1))  # ГАУСС
+    im.paste(snow, (0, 0), snow)
+    im.paste(snow, (0, 0), snow)
+    # im.paste(oleni, (im.width-oleni.width, im.height-oleni.height), oleni)
+    im.paste(sani, (0, 0), sani)
+    # im.paste(sn, (0, im.height-sn.height), sn)
+    im.paste(ded, (im.width - ded.width, im.height - ded.height), ded)
+    im.paste(ded, (0, im.height - ded.height), ded)
+    im = im.filter(ImageFilter.GaussianBlur(radius=1))  # ГАУСС
+
     im.save(savename)
