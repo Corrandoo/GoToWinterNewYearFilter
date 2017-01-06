@@ -2,22 +2,34 @@ import tornado.ioloop
 import tornado.web
 import os
 import uuid
+from os import listdir
 
 from filter import process
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render('upload.html')
+        name = self.get_argument('c', 'default')
+        full_name = ""
+        if name=='default':
+            newname = str(uuid.uuid4())
+            self.render('upload.html', name=newname)
+        else:
+            list = listdir('results')
+            for filename in list:
+                if filename.find(name) != -1:
+                    full_name = filename
+
+            self.render('result.html', name=full_name) #full name - полное имя файла
     def post(self):
+        name = self.get_argument('c')
         fileinfo = self.request.files['image'][0]
         fname = fileinfo['filename']
         extn = os.path.splitext(fname)[1]
-        cname = str(uuid.uuid4()) + extn
+        cname = name + extn
         fh = open('images/' + cname, 'wb')
         fh.write(fileinfo['body'])
         #обработка
         process('images/'+cname, 'results/' + cname)
-
         self.render('result.html', name=cname)
 
 
