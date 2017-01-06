@@ -2,11 +2,11 @@ from PIL import Image
 print("Введите путь к картинке, к которой вы хотите применить фильтр.")
 im = Image.open(input())
 print("Выполняю. Ждите")
-snow = Image.open('snow.png')
-hat = Image.open('hat.png')
-rides = Image.open('santarides.png')
-salut = Image.open('salut.png')
-ramka = Image.open('ramkasneg.png')
+snow = Image.open('resources/snow.png')
+hat = Image.open('resources/hat.png')
+rides = Image.open('resources/santarides.png')
+salut = Image.open('resources/salut.png')
+ramka = Image.open('resources/ramkasneg.png')
 pixels = im.load()
 imWidth = im.width
 imHeight = im.height
