@@ -11,10 +11,10 @@ class MainHandler(tornado.web.RequestHandler):
         fname = fileinfo['filename']
         extn = os.path.splitext(fname)[1]
         cname = str(uuid.uuid4()) + extn
-        fh = open('images/' + cname, 'w')
+        fh = open('images/' + cname, 'wb')
         fh.write(fileinfo['body'])
         #обработка
-        fh = open('results/' + cname, 'w')
+        fh = open('results/' + cname, 'wb')
         fh.write(fileinfo['body'])
         self.render('result.html', name=cname)
 
