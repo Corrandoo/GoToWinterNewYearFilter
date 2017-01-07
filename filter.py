@@ -162,3 +162,73 @@ def processvc(filename, savename):
             else:
                 pixels[j, i] = dpixels[j, i]
     enh.save(savename)
+
+
+def processmm1(fototo, savepath):
+    im = Image.open(fototo)
+    im2 = im.copy()
+    pixels = im.load()
+    pixels2 = im2.load()
+    for i in range(im.width):
+        for j in range(im.height):
+            r, g, b = pixels[i, j]
+            if r < 128:
+                pixels[i, j] = (r + 50, g, b)
+            else:
+                pixels[i, j] = (r, g, b)
+
+            if b > 128:
+                pixels[i, j] = (r, g, b - 50)
+            else:
+                pixels[i, j] = (r, g, b)
+
+            if g > 128:
+                pixels[i, j] = (r, g - 50, b)
+            else:
+                pixels[i, j] = (r, g, b)
+
+            if g < 50 and r < 50 and b < 50:
+                pixels[i, j] = (r + 50, g + 50, b + 50)
+            else:
+                pixels[i, j] = (r, g, b)
+
+            if g < 200 and r < 200 and b < 200:
+                pixels[i, j] = (r - 50, g - 50, b - 50)
+            else:
+                pixels[i, j] = (r, g, b)
+    im.save(savepath)
+
+
+def processmm2(fototo2, savepath2):
+    im = Image.open(fototo2)
+    im2 = im.copy()
+    pixels = im.load()
+    pixels2 = im2.load()
+    for i in range(im.width):
+        for j in range(im2.height):
+            r, g, b = pixels2[i, j]
+            if r < 128:
+                pixels2[i, j] = (r + 40, g, b)
+            else:
+                pixels2[i, j] = (r, g, b)
+
+            if b > 128:
+                pixels2[i, j] = (r, g, b - 40)
+            else:
+                pixels2[i, j] = (r, g, b)
+
+            if g > 128:
+                pixels2[i, j] = (r, g - 40, b)
+            else:
+                pixels2[i, j] = (r, g, b)
+
+            if g < 50 and r < 50 and b < 50:
+                pixels2[i, j] = (r + 40, g + 40, b + 40)
+            else:
+                pixels2[i, j] = (r, g, b)
+
+            if g < 200 and r < 200 and b < 200:
+                pixels2[i, j] = (r, g - 40, b - 40)
+            else:
+                pixels2[i, j] = (r, g, b)
+    im.save(savepath2)
