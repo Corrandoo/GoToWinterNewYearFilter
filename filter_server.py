@@ -5,6 +5,8 @@ import uuid
 from os import listdir
 
 from filter import processik
+from filter import processym
+from filter import processdb
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -29,7 +31,15 @@ class MainHandler(tornado.web.RequestHandler):
         fh = open('images/' + cname, 'wb')
         fh.write(fileinfo['body'])
         #обработка
-        processik('images/'+cname, 'results/' + cname)
+
+        type = self.get_argument('filter', "default")
+        if type == "filterik":
+            processik('images/' + cname, 'results/' + cname)
+        elif type == "filterym":
+            processym('images/' + cname, 'results/' + cname)
+        elif type == "filterdb":
+            processdb('images/' + cname, 'results/' + cname)
+
         self.render('result.html', name=cname)
 
 
