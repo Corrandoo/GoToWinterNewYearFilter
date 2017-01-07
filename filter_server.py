@@ -4,9 +4,7 @@ import os
 import uuid
 from os import listdir
 
-from filter import processik
-from filter import processym
-from filter import processdb
+from filter import processik, processdb, processym, processvc
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -39,6 +37,8 @@ class MainHandler(tornado.web.RequestHandler):
             processym('images/' + cname, 'results/' + cname)
         elif type == "filterdb":
             processdb('images/' + cname, 'results/' + cname)
+        elif type == "filtervc":
+            processvc('images/' + cname, 'results/' + cname)
 
         self.render('result.html', name=cname)
 
