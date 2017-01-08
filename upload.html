@@ -1,30 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Фотофильтр</title>
-    <link rel="stylesheet" type="text/css" href="static/style.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UNF-8">
+  <title>Фотофильтр</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link rel="icon" href="static/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon">
+  <style>
+  html {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  body {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #EF9CA7;
+  }
+  h2 {
+    font-family: 'Lobster', cursive;
+  }
+  .centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .panel{
+    background-color:#77A38C;
+  }
+}
 
-</head>
-
+  </style>
+  </head>
 <body>
-
-    <h1 style="text-align: center;">Фотофильтр</h1>
-    <form style="text-align: center;" action="/?c={{name}}" method="post" enctype="multipart/form-data">
-        <input type="file" name="image"/>
-        <input type="submit" value="Обработать"/><br />
-        <b>Выберите фильтр, который вы желаете использовать:</b><br />
+  <div class="row">
+    <div class="col-xs-12 col-md-4 col-md-offset-4 text-center centered">
+      <div class="panel" style="padding: 15px; margin: 10px;">
+        <h2 class="form-signin-heading" style="margin-bottom: 15px;">Фотофильтр</h2>
+        <form action="/" method="post" enctype="multipart/form-data">
+          <div class="form-group" >
+            <input class="btn btn-default " name="image" type="file">
+          </div>
+            <div class="form-group">
         <input type="radio" name="filter" value="filterik" checked />Фильтр Ивана<br />
         <input type="radio" name="filter" value="filterym" />Фильтр Юры<br />
         <input type="radio" name="filter" value="filterdb" />Фильтр Димы<br />
         <input type="radio" name="filter" value="filtervc" />Фильтр Вики<br />
         <input type="radio" name="filter" value="filtermm1" />Фильтр Марата №1<br />
         <input type="radio" name="filter" value="filtermm2" />Фильтр Марата №2<br />
-    </form>
-    <br/>
-    <p align="center" style="color: red; font-size: 48px">{{error_report}}</p>
+            </div>
+          <div class="form-group">
+            <input class="btn btn-info"  type="submit" value="Обрабатывать"></input>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<p align="center" style="color: red; font-size: 48px">{{error_report}}</p>
 </body>
 </html>
