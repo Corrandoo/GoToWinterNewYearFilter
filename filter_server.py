@@ -50,7 +50,9 @@ class MainHandler(tornado.web.RequestHandler):
 settings = [
     ('/', MainHandler),
     ('/images/(.*)', tornado.web.StaticFileHandler, {'path': 'images'}),
-    ('/results/(.*)', tornado.web.StaticFileHandler, {'path': 'results'})
+    ('/results/(.*)', tornado.web.StaticFileHandler, {'path': 'results'}),
+    ('/static/(.*)', tornado.web.StaticFileHandler, {'path': 'static'}),
+    ('/css/(.*)', tornado.web.StaticFileHandler, {'path': 'css'})
 ]
 
 app = tornado.web.Application(settings)

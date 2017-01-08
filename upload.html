@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    bootstrap.js
     <meta charset="UTF-8">
     <title>Фотофильтр</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="static/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon">
 
 </head>
 
 <body>
-    <h1>Фотофильтр</h1>
-    <form action="/?c={{name}}" method="post" enctype="multipart/form-data">
+
+    <h1 style="text-align: center;">Фотофильтр</h1>
+    <form style="text-align: center;" action="/?c={{name}}" method="post" enctype="multipart/form-data">
         <input type="file" name="image"/>
-        <input type="submit" value="Обработать"/>
-        <p><b>Выберите фильтр, который вы желаете использовать:</b></p>
-        <input type="radio" name="filter" value="filterik" checked>Фильтр Ивана<Br>
-        <input type="radio" name="filter" value="filterym">Фильтр Юры<Br>
-        <input type="radio" name="filter" value="filterdb">Фильтр Димы<Br>
-        <input type="radio" name="filter" value="filtervc">Фильтр Вики<Br>
-        <input type="radio" name="filter" value="filtermm1">Фильтр Марата №1<Br>
-        <input type="radio" name="filter" value="filtermm2">Фильтр Марата №2<Br>
+        <input type="submit" value="Обработать"/><br />
+        <b>Выберите фильтр, который вы желаете использовать:</b><br />
+        <input type="radio" name="filter" value="filterik" checked />Фильтр Ивана<br />
+        <input type="radio" name="filter" value="filterym" />Фильтр Юры<br />
+        <input type="radio" name="filter" value="filterdb" />Фильтр Димы<br />
+        <input type="radio" name="filter" value="filtervc" />Фильтр Вики<br />
+        <input type="radio" name="filter" value="filtermm1" />Фильтр Марата №1<br />
+        <input type="radio" name="filter" value="filtermm2" />Фильтр Марата №2<br />
     </form>
 
 </body>
