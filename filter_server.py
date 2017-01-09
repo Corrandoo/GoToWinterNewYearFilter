@@ -2,9 +2,12 @@ import tornado.ioloop
 import tornado.web
 import os
 import uuid
+
 from os import listdir
 
-from filter import processik, processdb, processym, processvc, processmm1, processmm2
+from IPython.core import logger
+
+from filter import processik, processdb, processym, processvc, processmm1, processmm2, processmn
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -44,10 +47,13 @@ class MainHandler(tornado.web.RequestHandler):
                 processmm1('images/' + cname, 'results/' + cname)
             elif type == "filtermm2":
                 processmm2('images/' + cname, 'results/' + cname)
+            elif type == "filtermn":
+                processmn('images/' + cname, 'results/' + cname)
 
             self.render('result.html', name=cname)
-        except:
-            self.render('upload.html', name=str(uuid.uuid4()), error_report="Загрузите файл перед отправкой его в фильтр!")
+        except Exception as e:
+            self.render('upload.html', name=str(uuid.uuid4()), error_report="Загрузите фотографию перед ее отправкой в фильтр!")
+            print(str(e))
 
 
 settings = [

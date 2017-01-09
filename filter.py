@@ -5,7 +5,7 @@ DELTA = 30
 EPS = 0.0001
 
 def processik(filename, savename):
-    im = Image.open(filename)
+    im = Image.open(filename).convert("RGB")
     pixels = im.load()
 
     snow = Image.open('resources/snowik.png')
@@ -100,7 +100,7 @@ def processdb(filename, savename):
 
 
 def processym(filename, savename):
-    im = Image.open(filename)
+    im = Image.open(filename).convert("RGB")
     pixels = im.load()
     snow = Image.open('resources/snowym.png')  # СНЕГ
     snow = snow.resize((im.width, im.height))
@@ -129,7 +129,7 @@ def processym(filename, savename):
     im.save(savename)
 
 def processvc(filename, savename):
-    img = Image.open(filename)
+    img = Image.open(filename).convert("RGB")
     img = img.filter(ImageFilter.DETAIL)
     enh = ImageEnhance.Contrast(img).enhance(1.3) #30% more contrast
     out = enh.filter(ImageFilter.BLUR)
@@ -165,7 +165,7 @@ def processvc(filename, savename):
 
 
 def processmm1(fototo, savepath):
-    im = Image.open(fototo)
+    im = Image.open(fototo).convert("RGB")
     im2 = im.copy()
     pixels = im.load()
     pixels2 = im2.load()
@@ -200,7 +200,7 @@ def processmm1(fototo, savepath):
 
 
 def processmm2(fototo2, savepath2):
-    im = Image.open(fototo2)
+    im = Image.open(fototo2).convert("RGB")
     im2 = im.copy()
     pixels = im.load()
     pixels2 = im2.load()
@@ -232,3 +232,51 @@ def processmm2(fototo2, savepath2):
             else:
                 pixels2[i, j] = (r, g, b)
     im.save(savepath2)
+
+def processmn(filename, savename):
+    name = filename
+    im = Image.open(name).convert('RGBA')
+    elc = Image.open('resources/elch.png').convert('RGBA')
+    a = int(im.width * 0.05)
+    b = int(im.height * 0.05)
+    elc = elc.resize((a, a))
+    ded = Image.open('resources/indexx.png').convert('RGBA')
+    ded = ded.resize((int(im.width * 0.05), int(im.height * 0.07)))
+    snegg = Image.open('resources/888.png').convert('RGBA')
+    snegg = snegg.resize((im.width, im.height))
+    pixels = im.load()
+    for i in range(im.width):
+        for j in range(im.height):
+            r, g, b, a = pixels[i, j]
+            r = min(255, r + 150)
+            g = min(255, g + 55)
+            b = min(255, b + 55)
+            pixels[i, j] = (r, g, b, a)
+
+    from random import randint
+    v = randint(1, 20)
+
+    for i in range(v):
+        r = 0.1 * (randint(1, 9))
+        o = 0.1 * (randint(1, 9))
+
+        box = (int(im.width * r), int(im.width * o), int(im.width * r) + elc.width, int(im.width * o) + elc.height)
+        # (левый верхний(x),левый верхний(y),правый нижний(x),правый нижний(y))
+        im.paste(elc, box, elc)
+
+    from random import randint
+    v = randint(1, 3)
+
+    for i in range(v):
+        r = 0.1 * (randint(1, 9))
+        o = 0.1 * (randint(1, 9))
+
+        box1 = (int(im.width * r), int(im.height * o), int(im.width * r) + ded.width, int(im.height * o) + ded.height)
+        # (левый верхний(x),левый верхний(y),правый нижний(x),правый нижний(y))
+        im.paste(ded, box1, ded)
+
+    box2 = (0, 0, im.width, im.height,)
+    # (левый верхний(x),левый верхний(y),правый нижний(x),правый нижний(y))
+    im.paste(snegg, box2, snegg)
+
+    im.save(savename)
